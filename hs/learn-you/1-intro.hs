@@ -167,6 +167,8 @@ nSucc = map succ
 swap :: (Enum a, Enum b) => (a, b) -> (b, a)
 swap t = (snd t, fst t)
 
+swap' (x, y) = (y, x)
+
 -- right triangles satisfying specific conditions
 triples = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a + b + c == 24]
 
