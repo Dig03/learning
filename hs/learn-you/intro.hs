@@ -156,8 +156,19 @@ fizzbuzzDisp = putStrLn (unlines (fizzbuzz 1 100))
     fst and snd are functions that do obvious things to
     a 2 length tuple.
     (otherwise we have to use pattern matching)
-    {- BOOKMARK: page 20 -}
 -}
+
+doubleSucc :: (Enum a, Enum b) => (a, b) -> (a, b)
+doubleSucc (x, y) = (succ x, succ y)
+
+nSucc :: Enum a => [a] -> [a]
+nSucc = map succ
+
+swap :: (Enum a, Enum b) => (a, b) -> (b, a)
+swap t = (snd t, fst t)
+
+-- right triangles satisfying specific conditions
+triples = [(a, b, c) | c <- [1..10], b <- [1..c], a <- [1..b], a^2 + b^2 == c^2, a + b + c == 24]
 
 -- Quick memory notes on foldr
 lmax :: [Double] -> Double
