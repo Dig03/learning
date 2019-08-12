@@ -55,8 +55,8 @@ quicksort :: Ord a => [a] -> [a]
 quicksort []     = []
 quicksort (p:xs) = quicksort smaller ++ [p] ++ quicksort largerEq
     where
-        smaller  = filter (\x -> x < p) xs
-        largerEq = filter (\x -> x >= p) xs
+        smaller  = filter (<= p) xs
+        largerEq = filter (> p) xs
 
 -- book impl.
 
