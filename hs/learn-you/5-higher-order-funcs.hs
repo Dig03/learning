@@ -53,4 +53,25 @@ filter' f (x:xs)
     | f x       = x : filter' f xs
     | otherwise = filter' f xs
 
-{- BOOKMARK: PAGE 67 -}
+-- largest number under 100,000 divisble by 3,829
+
+largestDivisible :: Integer
+largestDivisible = head (filter p [100000,99999..])
+    where p x = x `mod` 3829 == 0
+
+-- takeWhile 'takes' while a predicate is true, e.g.
+-- takeWhile (/= ' ') "elephants know how to party" == "elephants"
+
+collatz :: Integer -> [Integer]
+collatz 1 = [1]
+collatz x
+    | even x = x:collatz (x `div` 2)
+    | odd  x = x:collatz (3 * x + 1)
+
+-- for starting numbers between 1..100, how many have a length greater than 15?
+answer :: Int
+answer = length (filter (> 15) (map (length . collatz) [1..100]))
+
+-- mapping functions with multiple parameters is possible
+
+{- BOOKMARK: PAGE 70 -}
