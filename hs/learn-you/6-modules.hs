@@ -1,5 +1,6 @@
 import Data.List
 import Data.Char
+import qualified Data.Map as Map
 -- this is how we import modules
 -- must be done before any definitions
 
@@ -96,4 +97,60 @@ abbrevFancyFirstDigitSumTo n = (n `mod` 9, n `div` 9)
 
 -- mapping keys to values
 
-{- BOOKMARK: PAGE 98 -}
+{-
+    We can achieve a key-value mapping in many ways.
+    One such way is an Association List, a list used to store
+    key/value pairs where ordering doesn't matter.
+
+    One such way to represent these in Haskell, is a list
+    of tuples. s.t. [(Key, Value)]
+    The following functions are the implementation of such a
+    system.
+-}
+
+lookup' :: Eq k => k -> [(k, v)] -> Maybe v
+lookup' _ []     = Nothing
+lookup' k ((x, v):xs)
+    | k == x    = Just v
+    | otherwise = lookup' k xs
+
+findKey :: Eq k => k -> [(k, v)] -> v
+findKey key xs = snd . head . filter (\(k, v) -> key == k) $ xs
+-- bad because possible runtime error
+
+findKey' :: Eq k => k -> [(k, v)] -> Maybe v
+findKey' key = foldr (\(k, v) acc -> if key == k then (Just v) else acc) Nothing
+
+-- Data.Map
+
+{-
+    The above was an implementation of lookup from Data.List
+
+    Map offers a sort of association list which is much faster
+    than our implementation.
+
+    Map.fromList allows us to convert a [(k, v)]-style association
+    list to a Map.
+-}
+
+phoneBook :: Map.Map String String
+phoneBook = Map.fromList $
+    [("betty", "555-2938")
+    ,("bonnie", "452-2928")
+    ,("patsy", "493-2928")
+    ,("lucille", "205-2928")
+    ,("wendy", "939-8282")
+    ,("penny", "853-2492")
+    ]
+
+-- Map.lookup allows us to lookup keys in the same way as before
+
+wendyNumber :: Maybe String 
+wendyNumber = Map.lookup "wendy" phoneBook
+
+-- Map.insert allows us to insert new entries into the map
+
+updatedPhoneBook :: Map.Map String String
+updatedPhoneBook = Map.insert "grace" "341-9021" phoneBook
+
+-- Map.size returns the number of entries in a Map
