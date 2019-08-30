@@ -1,0 +1,48 @@
+% documentclass, begin, end comprise the basic layout of a LaTeX file
+% LaTeX command syntax is \commandname{option}
+% \begin & \end define `environments' areas of a document where certain typesetting rules apply
+% sort of like CSS, it is imperative the `document' environment is topmost, however.
+% LaTeX comes with predefined environments, you can define your own, but it likely exists.
+
+\documentclass{article}
+
+% extra commands to setup title page
+% this area before our main document is called the `preamble'
+\title{Learning \LaTeX{} by doing.}
+\date{\today}
+\author{Dig03}
+
+% you can also define sections within a document (for paragraphing and the like)
+% they are: section, subsection, subsubsection, ..., paragraph, subparagraph
+\begin{document}
+
+\pagenumbering{gobble} % set preference to ignore page numbers
+\maketitle % title page
+\newpage   % page break
+\pagenumbering{arabic} % turn page numbers back on, `roman' for roman numbering
+
+\section{General Initial Thoughts}
+
+Hello, world!
+
+\subsection{Even More Specific Thoughts}
+
+Sometimes, I dream about cheese.
+
+\subsubsection{Unreasonably Specific Thoughts}
+
+I think we've gone too deep.
+
+\paragraph{A Paragraph}
+
+This is a paragraph.
+
+\subparagraph{A Subparagraph}
+
+This is a subparagraph.
+
+\section{Surprise Section}
+
+\end{document}
+
+% BOOKMARK: 03 Packages https://www.latex-tutorial.com/tutorials/packages/
