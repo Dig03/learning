@@ -6,6 +6,10 @@
 
 \documentclass{article}
 
+% this is a package import
+% packages must be declared in the preamble.
+\usepackage{amsmath}
+
 % extra commands to setup title page
 % this area before our main document is called the `preamble'
 \title{Learning \LaTeX{} by doing.}
@@ -43,6 +47,86 @@ This is a subparagraph.
 
 \section{Surprise Section}
 
+\section{Math environment features}
+
+\subsection{equation}
+
+\begin{equation}
+	f(x) = x^2
+\end{equation}
+
+\subsection{equation*}
+
+This environment is provided by the package `amsmath', and removes automatic numbering.
+
+\begin{equation*}
+	f(x, y) = x^2 + y^2 + c
+\end{equation*}
+
+\subsection{align*}
+
+This environment is needed for aligning multiple equations.
+
+\begin{align*}
+	1 + 2 &= 3\\
+	1 &= 3 - 2
+\end{align*}
+
+Here we see that the equations are aligned such that the equalities are lined up.
+Equations are aligned at the ampersand (\&). Equations are separated with linebreaks (\textbackslash\textbackslash).
+
+\subsection{Fractions and more}
+
+\begin{align*}
+	f(x) &= x^2\\
+	g(x) &= \frac{1}{x}\\
+	F(x) &= \int^a_b \frac{1}{3}x^3
+\end{align*}
+
+`int' here for integrals, and `frac' for fractions.
+
+`sqrt' also exists, and can be nested like so:
+
+\begin{equation*}
+	\frac{1}{\sqrt{x}}
+\end{equation*}
+
+More complicated expressions naturally become more error prone. Therefore you should take great care in opening and closing the braces (\{\}). Much time may be wasted on debugging such errors. The \textit{Lyx} program offers a great formula editor, which can ease this.
+
+\subsection{Matrices}
+
+\begin{equation*}
+	\begin{matrix}
+		1 & 0\\
+		0 & 1
+	\end{matrix}
+\end{equation*}
+
+Must be defined within a math environment (equation, equation*, align*, inline).
+
+To surround the matrix by brackets we must use special statements. This ensures scaling works properly.
+
+\begin{equation*}
+	\left[
+	\begin{matrix}
+		1 & 0\\
+		0 & 1
+	\end{matrix}
+	\right]
+\end{equation*}
+
+This also works for parentheses and braces and is not limited to matrices:
+
+\begin{equation*}
+	\left(\frac{1}{\sqrt{x}}\right)
+\end{equation*}
+
+\section{Math Features (non-environment)}
+
+\subsection{Inline math}
+The following is an example of inline math: $f(x) = x^2$.
+
+
 \end{document}
 
-% BOOKMARK: 03 Packages https://www.latex-tutorial.com/tutorials/packages/
+% BOOKMARK: 05 Figures https://www.latex-tutorial.com/tutorials/figures/
