@@ -9,6 +9,8 @@
 % this is a package import
 % packages must be declared in the preamble.
 \usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
 
 % extra commands to setup title page
 % this area before our main document is called the `preamble'
@@ -125,6 +127,26 @@ This also works for parentheses and braces and is not limited to matrices:
 
 \subsection{Inline math}
 The following is an example of inline math: $f(x) = x^2$.
+
+\section{Figures and Images}
+
+The following requires the `graphicx' package.
+
+\subsection{Figure environment}
+
+\begin{figure}[H]
+	\includegraphics[width=\linewidth]{boat.jpg}
+	\caption{A boat.}
+	\label{fig:boat1}
+\end{figure}
+
+Figure \ref{fig:boat1} shows a boat.
+
+The `float' can be set on figures. It consists of a couple possible values.
+h (here), t (top), b (bottom), p ([extra] page), ! (override), H (float package, stricter h!).
+
+\subsection{Subfigure environment}
+
 
 
 \end{document}
