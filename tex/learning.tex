@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{subcaption}
 
 % extra commands to setup title page
 % this area before our main document is called the `preamble'
@@ -147,8 +148,47 @@ h (here), t (top), b (bottom), p ([extra] page), ! (override), H (float package,
 
 \subsection{Subfigure environment}
 
+Usually you won't be adding single images, you'll want multiple to aid comparison.
+For this, you'll need a different environment called subfigure, provided by `subcaption'.
 
+\begin{figure}[h!]
+  \centering
+  % rule, width should be .1 smaller than expected
+  % e.g. 1/2 - 0.5 -> ( - .1 ) -> 0.4
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{coffee.jpg}
+    \caption{Coffee.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.4\linewidth}
+    \includegraphics[width=\linewidth]{coffee.jpg}
+    \caption{More coffee.}
+  \end{subfigure}
+  \caption{The same cup of coffee. Two times.}
+  \label{fig:coffee}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}[b]{0.2\linewidth}
+    \includegraphics[width=\linewidth]{coffee.jpg}
+     \caption{Coffee.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\linewidth}
+    \includegraphics[width=\linewidth]{coffee.jpg}
+    \caption{More coffee.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.2\linewidth}
+    \includegraphics[width=\linewidth]{coffee.jpg}
+    \caption{Tasty coffee.}
+  \end{subfigure}
+  \begin{subfigure}[b]{0.5\linewidth}
+    \includegraphics[width=\linewidth]{coffee.jpg}
+    \caption{Too much coffee.}
+  \end{subfigure}
+  \caption{The same cup of coffee. Multiple times.}
+  \label{fig:coffee3}
+\end{figure}
 
 \end{document}
 
-% BOOKMARK: 05 Figures https://www.latex-tutorial.com/tutorials/figures/
+% BOOKMARK: 06 Table of contents https://www.latex-tutorial.com/tutorials/table-of-contents/
