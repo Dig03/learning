@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void increment(int *n) {
+void increment(int* n) {
     /* Increment (++) the value-of (*) n. */
     (*n)++;
 }
@@ -12,7 +12,7 @@ int main() {
         A pointer stores the address of a particular object.
         Therefore the pointer must be initialised with the address-of (&) that object.
     */
-    int *pa = &a;
+    int* pa = &a;
     /* Both will return the same address, (e.g. 0060FF08). */
     printf("pa has value: %p\n", pa);
     printf("Address of a: %p\n", &a);
