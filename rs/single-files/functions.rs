@@ -1,6 +1,7 @@
 fn main() {
     println!("Hello, world!");
     /*
+     * little change here
      * This
      * is
      * a
@@ -24,6 +25,8 @@ fn main() {
      *
      *
      * yes
+     *
+     * little change here
      */
     another_func();
     another_arg_func(5);
