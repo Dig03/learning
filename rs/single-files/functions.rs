@@ -17,13 +17,13 @@ fn main() {
      * it
      *
      *
-     * ... 
+     * ...
      *
      * ...
      */
     another_func();
     another_arg_func(5);
-    println!("{}", mathsy_func(2,2));
+    println!("{}", mathsy_func(2, 2));
 }
 
 fn another_func() {
