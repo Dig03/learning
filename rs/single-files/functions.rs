@@ -20,6 +20,10 @@ fn main() {
      * ...
      *
      * ...
+     * ...
+     *
+     *
+     * yes
      */
     another_func();
     another_arg_func(5);
