@@ -12,10 +12,6 @@ fn main() {
     twelve_days();
 }
 
-// initial assignments
-// generate nth fibonacci number
-// print the lyrics of a Christmas Carol (take advantage of repetition)
-
 fn f_to_c(f: f64) -> f64 {
     (f - 32.0) * 5.0 / 9.0
 }
