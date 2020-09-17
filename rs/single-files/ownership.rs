@@ -109,6 +109,60 @@ fn main() {
     // A reference _refers_ to the value it is built from,
     // but does not _own_ it. Thus when a reference is dropped
     // it doesn't cause the referred variable to be dropped.
+
+    // if a function returns a dangling pointer, i.e.
+    // fn dangle() -> &String {
+    //     let s = String::from("hello");
+    //     &s
+    //  }
+    //
+    //  It will produce a compiler error, since it value
+    //  is not borrowed, it just drops out of scope.
+    //
+    // fn no_dangle() -> String {
+    //     let s = String::from("hello");
+    //     s
+    // }
+    // Writing the function like this solves the issue, since ownership
+    // is 'given' as before, the variable is supplied directly, ownership
+    // is transferred to the above scope.
+
+    // Finally: the rules of references
+    // - at any time: either one mutable, or any number of immutable references can exist
+    // - references must always be valid
+
+    // So, what if we want a function to return the first word in a string?
+    // We need another ownership-less type: the Slice
+    //
+    // You can take a slice by taking a reference in the usual way, but
+    // appending bounds, e.g.
+    
+    let another_string = String::from("Hello, world!");
+    let hello = &another_string[..5];
+    let world = &another_string[7..12];
+
+    println!("{}", hello);
+    println!("{}", world);
+    
+    // To return a string slice from a function, use the type '&str'
+    // Using slices to get 'first words' ensures consistency,
+    // as 'mutable borrows' (or functions changing the string)
+    // will invalidate all slices
+    // e.g., obtaining a slice and then clearing the originating
+    // string produces a compile-time error.
+    //
+    // '&str' is a superset containing all values of type '&String'
+    //
+    // this is because '&String' is 'reference to type String' (general)
+    //
+    // but '&str' is 'reference to a string Slice' since all '&Strings' can be string slices with
+    // full size, it ends up being a more vague type, leading to the signature for first_word
+    //
+    // fn first_word(s: &str) -> &str
+    // therefore, with a String, you simply supply &s[..], allowing for a more general API
+    // also important note: string literals have type &str
+    //
+    // Slices exist for all types, a slice of an i32 array is '&[i32]'
 }
 
 fn takes_ownership(string: String) {
