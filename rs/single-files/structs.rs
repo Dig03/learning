@@ -29,6 +29,12 @@ fn main() {
     
     display_color(&black);
     display_point(&origin);
+
+    // You can also create 'Unit-like' structs, without any fields.
+    // These are useful for implementing traits on types but where
+    // no data is needed to be stored in the type itself.
+    //
+    // We will see this in data later.
 }
 
 fn display_point(point: &Point) {
