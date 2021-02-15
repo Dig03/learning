@@ -14,6 +14,11 @@ impl Rectangle {
     //     original instance after transformation
     // - borrowed immutably (done here)
     // - borrowed mutably
+    //
+    // These can be summarised with:
+    // &self     - reading
+    // &mut self - mutating
+    // self      - consuming
 
     // these functions are methods, because
     // they work on self.
