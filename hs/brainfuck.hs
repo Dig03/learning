@@ -19,20 +19,21 @@
 -}
 
 import qualified Data.Stream as S
-import Data.Stream
+import Data.Stream (Stream, (<:>))
 import Data.Word
 import Data.Char
+import System.IO
+import System.Environment
+import System.Exit
 
-main = brainfuck
-
-data Instruction = Left
-                 | Right
+data Instruction = TapeLeft
+                 | TapeRight
                  | Inc
                  | Dec
                  | Print
                  | Read
                  | OpenLoop
-                 | CloseLoop 
+                 | CloseLoop
 
 -- a good safe representation of tape is the "infinity to the left",
 -- the "infinity to the right", and the current cell
@@ -43,7 +44,11 @@ data Instruction = Left
 -- otherwise the lists are just infinite zeroes
 data Tape a = Tape (Stream a) (Stream a) a
 
+-- IO stored in the state as we basically build an IO thunk which eventually gets resolved
+data State a = State (Tape a) (IO ())
+
 type Byte = Word8
+type BrainfuckSource = [Instruction]
 
 -- move the infinite tape left
 left :: Tape a -> Tape a
@@ -73,13 +78,18 @@ dec (Tape left right current) = Tape left right (current - 1)
 put :: Tape Byte -> IO ()
 put (Tape left right current) = putChar (chr (fromEnum current))
 
+charToWord8 :: Char -> Word8
+charToWord8 = toEnum . fromEnum
+
 -- read a single char into the current cell
-get :: Tape Byte -> Tape Byte
-get (Tape left right current) = Tape left right (getChar)
+-- get :: Tape Byte -> Tape Byte
+-- get (Tape left right current) = do
+--     char <- getChar
+--     Tape left right (charToWord8 char)
 
 parseChar :: Char -> Instruction
-parseChar '<' = Left
-parseChar '>' = Right
+parseChar '<' = TapeLeft
+parseChar '>' = TapeRight
 parseChar '+' = Inc
 parseChar '-' = Dec
 parseChar '.' = Print
@@ -87,9 +97,31 @@ parseChar ',' = Read
 parseChar '[' = OpenLoop
 parseChar ']' = CloseLoop
 
-parse :: String -> [Instruction]
+parse :: String -> BrainfuckSource
 parse = map parseChar
 
-brainfuck :: IO ()
-brainfuck = print "unimplemented"
+brainfuck :: Tape Byte -> BrainfuckSource -> IO ()
+brainfuck _ _ = print "unimplemented"
 
+zeroes :: Stream Byte
+zeroes = S.repeat 0
+
+initialTape :: Tape Byte
+initialTape = Tape zeroes zeroes 0
+
+interpFile :: String -> IO ()
+interpFile path = do
+    contents <- readFile path
+    brainfuck initialTape (parse contents)
+
+exit = exitWith ExitSuccess
+exitFail  = exitWith (ExitFailure 1)
+
+parseArgs ["-h"] = usage >> exit
+parseArgs []     = putStrLn "no input file" >> exit
+parseArgs [path] = readFile path
+parseArgs _      = putStrLn "invalid input" >> exitFail
+
+usage = putStrLn "Usage: brainfuck [-h] [file]"
+
+main = getArgs >>= parseArgs >>= interpFile 
